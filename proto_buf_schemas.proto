@@ -1,0 +1,86 @@
+// schemas for mqtt_SCADA
+
+message description {
+  
+    required string clientName = 1;
+    optional string description = 2;
+    repeated point points = 3;
+    repeated action actions = 4;
+    
+
+    message point {
+ 
+        required string pointName = 1;
+        optional string description = 2;
+
+    }
+
+    message action {
+
+        required string name = 1;
+        optional string description = 2;
+        repeated argument arguments = 3;
+
+        message argument {
+
+            required string name = 1;
+
+        }
+
+    }
+
+}
+
+
+message actionQuery {
+
+    required string remitent = 1;
+    required string actionName = 2;
+    required uint64 identifier = 3;
+    required string qos = 4;
+    repeated argument arguments = 5;
+
+    message argument {
+
+        optional string strVal = 1;
+        optional float floatVal = 2;
+        optional int64 intVal = 3;
+        optional bool boolVal = 4;
+
+    }
+
+}
+
+
+message actionResponse {
+
+    required uint64 identifier = 1;
+    optional string errorDescription = 2;
+    repeated responseType response = 3;
+
+    message responseType {
+
+        optional int64 intResponse = 1;
+        optional float floatResponse = 2;
+        optional bool boolResponse = 3;
+        optional string strResponse = 4;
+
+    }
+
+}
+
+
+message pointUpdate {
+
+    required updateType update = 1
+
+    message updateType {
+
+        optional int64 intResponse = 1;
+        optional float floatResponse = 2;
+        optional bool boolResponse = 3;
+        optional string strResponse = 4;
+
+    }
+
+}
